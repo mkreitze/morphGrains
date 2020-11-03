@@ -6,14 +6,13 @@
 import os
 import libFBCAGen
 import linecache
-
+import math
 #generates the Lg for a FBCA defined with a score matrix 
 def generateFBCA(scoreMatrix,side,d,CAMapInit):
     gif=[];CAMap=[];CAMap=libFBCAGen.copyOver(CAMapInit) #inits
 
     for n in range(libFBCAGen.numOfGens):
         CAMap=libFBCAGen.updateMap(CAMap,scoreMatrix)
-#    print("Finished "+side)
     return(CAMap)
 
 #Takes in two score matrices (written as lists) and a value of lambda
@@ -36,7 +35,10 @@ def compareLs(lg1,lg2):
             if (lg1[x][y].state!=lg2[x][y].state):
                 isSame=0
             y+=1
-        x+=1
+        else: 
+            x+=1
+            continue
+        break
     return(isSame)
 
 #Takes two lambdas (as floats) and generates midpoint
@@ -49,10 +51,11 @@ def getMid(lambda1,lambda2):
 #define the two score matrices for the morph
 # sM1=[-0.5,-0.5,0.5,-0.5]
 # sM2=[0.5,-0.5,-0.5,-0.5]
-# sM1=[0.320205,0.952292,0.351335,0.837774]
-# sM2=[0.390741,0.728013,0.614486,0.378596]
-sM1=[0.320205,0.952292,0.351335,0.837774,0.390741,0.728013,0.614486,0.378596,0.320205,0.952292,0.351335,0.837774,0.390741,0.728013,0.614486,0.378596]
-sM2=[0.390741,0.728013,0.614486,0.378596,0.320205,0.952292,0.351335,0.837774,0.390741,0.728013,0.614486,0.378596,0.320205,0.952292,0.351335,0.837774,]
+sM1=[0.320205,0.952292,0.351335,0.837774]
+sM2=[0.390741,0.728013,0.614486,0.378596]
+sMs=[sM1,sM2]
+# sM1=[0.320205,0.952292,0.351335,0.837774,0.390741,0.728013,0.614486,0.378596,0.320205,0.952292,0.351335,0.837774,0.390741,0.728013,0.614486,0.378596]
+# sM2=[0.390741,0.728013,0.614486,0.378596,0.320205,0.952292,0.351335,0.837774,0.390741,0.728013,0.614486,0.378596,0.320205,0.952292,0.351335,0.837774,]
 
 ##DEFINTIONS
 d=[];d=os.getcwd()
@@ -61,8 +64,9 @@ curSide=["Left","Right","Middle"]
 libFBCAGen.CALength=20 #Length of the generated image (for min use 5)
 libFBCAGen.CAWidth=20 #Width of the generated image (for min use 4)
 libFBCAGen.useImages=0 #checks if you want images This is annoying
-libFBCAGen.numOfGens=10 #number of generations
+libFBCAGen.numOfGens=20 #number of generations
 libFBCAGen.numOfStates=2 #number of states (good until 10)
+numberOfTimes=10
 CAMapInit=[]
 borderLambdas=[]
 CAMapInit=libFBCAGen.initCA(CAMapInit) 
@@ -115,7 +119,7 @@ while (compareLs(lgRight,lgLeft)==0):
         direction+=1
         #print("Go Left")
 
-    if (direction==30):
+    if (direction==numberOfTimes):
         borderLambdas.append(lambdaMid)
         #get lambs
         lambdaLeft=lastDifferentLambda
@@ -129,9 +133,16 @@ while (compareLs(lgRight,lgLeft)==0):
         lgLeft=generateFBCA(sMLeft,"Found spot",d,CAMapInit)
         lgRight=generateFBCA(sMRight,"Found spot",d,CAMapInit)
         lgMid=generateFBCA(sMMid,"Found spot",d,CAMapInit)
-        #get middle
         #print(f"Left {lambdaLeft} Mid {lambdaMid} Right {lambdaRight}")
         direction=0
-print(borderLambdas)
 finalLambs = [round(x,5) for x in borderLambdas]
+for idx1,x in enumerate(finalLambs):
+    for idx2,y in enumerate(finalLambs):
+        #dont worry about the infinity case
+        if (abs(x-y)/min(abs(x),abs(y))<1e-4)and(idx1!=idx2):
+            finalLambs.remove(y)
 print(finalLambs)
+edgeRecord = open(f"morphEdges", "w")
+for n in range(len(sMs)):
+    if (n%2==0):
+        edgeRecord.write(f"{finalLambs}sMs{sMs[n]}sMs{sMs[n+1]}")
