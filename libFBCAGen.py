@@ -67,7 +67,10 @@ class Fbca:
 
 ## FUNCTIONS ##
 
-## GENERAL ##
+
+## GENERAL ## ## GENERAL ## ## GENERAL ##
+## GENERAL ## ## GENERAL ## ## GENERAL ##
+
 
 # State to Colour converter #
 ### Input: state (as an int)
@@ -118,7 +121,32 @@ def copyList(listInit):
         holder.append(x)
     return(holder)
 
-## FBCA ##
+
+# Folder generation #
+### Input: Name of a folder we want to make
+### Output: True (1) or False (0) if folder is made 
+def makeFolder(folderName):
+    try: 
+        os.makedirs(folderName)
+        return(1)
+    except:
+        return(0)
+
+# Image generation method #
+### Input: L_n (2d list of CACell with states), n, folder name, 
+### Output: An image file
+# Notes:
+# I have no idea what an image file is
+def genIm(CAMap,n,directory=os.getcwd(),quantifer="giveName"):
+    im= Image.new('RGB', (CALength, CAWidth))
+    for x in range(CALength):
+        for y in range(CAWidth):
+            im.putpixel((x,y),colourConvert(CAMap[x][y].state))
+    im.save(f"{directory}{quantifer} {str(n)}.png")
+    return(im)
+
+## FBCA ## ## FBCA ## ## FBCA ##
+## FBCA ## ## FBCA ## ## FBCA ##
 
 # L_0 generation #
 ### Input: A list full of CACells (representing an empty FBCA)
@@ -199,20 +227,33 @@ def updateMap(CAMap,scoreMatrix):
     return(CAMapCopy)
 
 
-## Score Matrix ##
+## SCORE MATRIX ## ## SCORE MATRIX ## ## SCORE MATRIX ##
+## SCORE MATRIX ## ## SCORE MATRIX ## ## SCORE MATRIX ##
 
-## Behaviour Work ##
+# Generate score matrix from a morph #
+### Input: Score matrix 1 (1d list), Score matrix 2 (1d list), lambda (float)
+### Output: Score matrix lambda
+# Notes:
+# Uses general equation of a convex set: lambda*sM1 + (1-lambda)*sM2 = sMLambda
+def genMorphSM(sM1,sM2,lamb):
+    sMNew=[]
+    for i in range(len(sM1)):
+        sMNew.append(lamb*sM2[i]+(1-lamb)*sM1[i])
+    return(sMNew)
+
+## BEHAVIOUR ## ## BEHAVIOUR ## ## BEHAVIOUR ##
+## BEHAVIOUR ## ## BEHAVIOUR ## ## BEHAVIOUR ##
 
 # Weak behavioural equivalence detector through L_g comparison #
 ##Input: Two L_gs represented as a lists of cells. 
-##Output: Boolean test (0==FALSE) for behaviour equivlance of associated FBCAs
-#Notes:
-#It is assumed that both L_gs are generated using the same F,g,L_0,n.
-#Because of this, if all cells of the L_g's have the same state, they are weakly behaviourally equivalent.  
+##Output: True (1) or False (0) if weakly behaviourally equivalent 
+# Notes:
+# It is assumed that both L_gs are generated using the same F,g,L_0,n.
+# Because of this, if all cells of the L_g's have the same state, they are weakly behaviourally equivalent.  
 def compareLs(lg1,lg2):
     isSame=1;x=0;y=0
-    while (x < libFBCAGen.CALength) and (isSame==1):
-        while (y < libFBCAGen.CAWidth) and (isSame==1):
+    while (x < CALength) and (isSame==1):
+        while (y < CAWidth) and (isSame==1):
             if (lg1.lG[x][y].state!=lg2.lG[x][y].state):
                 isSame=0
             y+=1
@@ -223,25 +264,4 @@ def compareLs(lg1,lg2):
     return(isSame)
 
 
-# Folder generation #
-### Input: Name of a folder we want to make
-### Output: True (1) or False (0) if folder is made 
-def makeFolder(folderName):
-    try: 
-        os.makedirs(folderName)
-        return(1)
-    except:
-        return(0)
 
-# Image generation method #
-### Input: L_n, n, folder name, 
-### Output: An image file
-# Notes:
-# I have no idea what an image file is
-def genIm(CAMap,n,directory=os.getcwd(),quantifer="giveName"):
-    im= Image.new('RGB', (CALength, CAWidth))
-    for x in range(CALength):
-        for y in range(CAWidth):
-            im.putpixel((x,y),colourConvert(CAMap[x][y].state))
-    im.save(f"{directory}{quantifer} {str(n)}.png")
-    return(im)
