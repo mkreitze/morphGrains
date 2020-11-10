@@ -29,12 +29,12 @@ sM2=[0.390741,0.728013,0.614486,0.378596]
 sMs=[sM1,sM2] # Matrices we are morphing between
 CAMapInit=[];CAMapInit=libFBCAGen.initCA(CAMapInit) #initalize a common L_0
 d=[];d=os.getcwd()+"/"
-random.seed(1)  #1 for held
+random.seed(2)  #1 for held
 
 ##Important varbs
 morphRes=1000 #How many equally spaced score matrices are generated btwn sM1 and sM2
 imageHeight=100 #Height of the generated image 
-quantifer="Test"
+quantifer="Two at 1000 rand(2)"
 lGs=[]
 behaviours=[]
 
@@ -73,7 +73,7 @@ for n in range(0,len(sMs)): #Incase we have multiple matrices we want to morph b
         for behaviour in behaviours:
             if (libFBCAGen.useImages == 1):
                 myEyes=str(round(behaviour[0].lambd,5))
-                libFBCAGen.genIm(behaviour[0].lG,libFBCAGen.numOfGens,d,myEyes)
+                libFBCAGen.genIm(behaviour[0].lG,libFBCAGen.numOfGens,d,f"{quantifer} {myEyes}")
 print("Generating Image")
 
 imageColourStep=(255*3)/(len(behaviours)-1)
@@ -100,4 +100,4 @@ for idx,behaviour in enumerate(behaviours):
     for thing in behaviour:
         for y in range(0,(imageHeight)):
             im.putpixel((thing.xSpot,y),(r,g,b))
-im.save("phaseMorph of "+str(libFBCAGen.numOfStates)+".png")
+im.save(f"phaseMorph of {quantifer}.png")

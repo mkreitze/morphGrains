@@ -7,41 +7,6 @@ import os
 import libFBCAGen
 import linecache
 import math
-import re
-#generates the Lg for a FBCA defined with a score matrix 
-def generateFBCA(scoreMatrix,d,CAMapInit,lambd):
-    gif=[];CAMap=[];CAMap=libFBCAGen.copyOver(CAMapInit) #inits
-
-    for n in range(libFBCAGen.numOfGens):
-        CAMap=libFBCAGen.updateMap(CAMap,scoreMatrix)
-    libFBCAGen.genIm(CAMap,libFBCAGen.numOfGens,d,lambd,1)
-    return(CAMap)
-
-#Takes in two score matrices (written as lists) and a value of lambda
-#The new score matrix is generated as lamb*(sM1) + (1-lamb)*sM2 -> sM2+lamb*(sM1-sM2)
-#note, the score matrices are ASSUMED to be the same dimension
-#lambda should go from 0 to 1 but it doesnt check so go wild
-def genMorphSM(sM1,sM2,lamb):
-    sMNew=[]
-    for i in range(len(sM1)):
-        sMNew.append(lamb*sM2[i]+(1-lamb)*sM1[i])
-    return(sMNew)
-
-#Takes in L_gs, that is the array of states representing the final state of an FBCA
-#Checks if every state is the same between two arrays (breaks early if not the case)
-#Returns 1 if true and 0 if false
-def compareLs(lg1,lg2):
-    isSame=1;x=0;y=0
-    while (x < libFBCAGen.CALength) and (isSame==1):
-        while (y < libFBCAGen.CAWidth) and (isSame==1):
-            if (lg1[x][y].state!=lg2[x][y].state):
-                isSame=0
-            y+=1
-        else: 
-            x+=1
-            continue
-        break
-    return(isSame)
 
 #Takes two lambdas (as floats) and generates midpoint
 #literally (lambda1+lambda2)/2
@@ -49,6 +14,7 @@ def getMid(lambda1,lambda2):
     midLamb=(lambda1+lambda2)/2
     return(midLamb)
 
+#This function parses the text data 
 def convTextListToList(listAsText):
     importantStuff=[]
     importantStuff=listAsText.split(",")
@@ -82,9 +48,9 @@ for line in edgeRecord:
     sM1=convTextListToList(splits[1])
     sM2=convTextListToList(splits[2])
     for lamb in lambdas:
-        sMCur=genMorphSM(sM1,sM2,lamb+smallDelta)
-        levelMap=generateFBCA(sMCur,d,CAMapInit,str(lamb+smallDelta))
-        sMCur=genMorphSM(sM1,sM2,lamb-smallDelta)
-        levelMap=generateFBCA(sMCur,d,CAMapInit,str(lamb-smallDelta))
+        sMCur=libFBCAGen.genMorphSM(sM1,sM2,lamb+smallDelta)
+        levelMap=libFBCAGen.generateFBCA(sMCur,d,CAMapInit,str(lamb+smallDelta))
+        sMCur=libFBCAGen.genMorphSM(sM1,sM2,lamb-smallDelta)
+        levelMap=libFBCAGen.generateFBCA(sMCur,d,CAMapInit,str(lamb-smallDelta))
 
 

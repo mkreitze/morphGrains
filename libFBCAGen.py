@@ -39,7 +39,6 @@ neighbours.append((1,0))#right (1 right)
 # Visualization parameters
 useImages=0 #checks if you want images  
 finalImage=1 #checks if you want the final image of a generated FBCA
-random.seed(1)  #1 for held  
 
 
 

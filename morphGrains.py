@@ -7,142 +7,100 @@ import os
 import libFBCAGen
 import linecache
 import math
-#generates the Lg for a FBCA defined with a score matrix 
-def generateFBCA(scoreMatrix,side,d,CAMapInit):
-    gif=[];CAMap=[];CAMap=libFBCAGen.copyOver(CAMapInit) #inits
 
-    for n in range(libFBCAGen.numOfGens):
-        CAMap=libFBCAGen.updateMap(CAMap,scoreMatrix)
-    return(CAMap)
+## DATA STRUCTURES BELOW ##
+class lGContainer:
+    def __init__(curContainer,lambd,scoreMatrix,lG,side):
+        curContainer.lG=lG
+        curContainer.lambd=lambd
+        curContainer.sM=scoreMatrix
+        curContainer.side=side
 
-#Takes in two score matrices (written as lists) and a value of lambda
-#The new score matrix is generated as lamb*(sM1) + (1-lamb)*sM2 -> sM2+lamb*(sM1-sM2)
-#note, the score matrices are ASSUMED to be the same dimension
-#lambda should go from 0 to 1 but it doesnt check so go wild
-def genMorphSM(sM1,sM2,lamb):
-    sMNew=[]
-    for i in range(len(sM1)):
-        sMNew.append(lamb*sM2[i]+(1-lamb)*sM1[i])
-    return(sMNew)
+## FUNCTIONS BELOW ##
 
-#Takes in L_gs, that is the array of states representing the final state of an FBCA
-#Checks if every state is the same between two arrays (breaks early if not the case)
-#Returns 1 if true and 0 if false
-def compareLs(lg1,lg2):
-    isSame=1;x=0;y=0
-    while (x < libFBCAGen.CALength) and (isSame==1):
-        while (y < libFBCAGen.CAWidth) and (isSame==1):
-            if (lg1[x][y].state!=lg2[x][y].state):
-                isSame=0
-            y+=1
-        else: 
-            x+=1
-            continue
-        break
-    return(isSame)
-
-#Takes two lambdas (as floats) and generates midpoint
-#literally (lambda1+lambda2)/2
+# Takes two lambdas (as floats) and generates midpoint
+# literally (lambda1+lambda2)/2
 def getMid(lambda1,lambda2):
     midLamb=(lambda1+lambda2)/2
-    return(midLamb)
+    return(midLamb)   
 
-##DEFINITIONS OF STUFF
-#define the two score matrices for the morph
+## DEFINITIONS
+# define the two score matrices for the morph
 # sM1=[-0.5,-0.5,0.5,-0.5]
 # sM2=[0.5,-0.5,-0.5,-0.5]
 sM1=[0.320205,0.952292,0.351335,0.837774]
 sM2=[0.390741,0.728013,0.614486,0.378596]
 sMs=[sM1,sM2]
+numberOfTimes=10 # Number of times we attempt to get to an edge before stopping
 # sM1=[0.320205,0.952292,0.351335,0.837774,0.390741,0.728013,0.614486,0.378596,0.320205,0.952292,0.351335,0.837774,0.390741,0.728013,0.614486,0.378596]
 # sM2=[0.390741,0.728013,0.614486,0.378596,0.320205,0.952292,0.351335,0.837774,0.390741,0.728013,0.614486,0.378596,0.320205,0.952292,0.351335,0.837774,]
 
-##DEFINTIONS
-d=[];d=os.getcwd()
-curSide=["Left","Right","Middle"]
-#defintions for FBCA generation
-libFBCAGen.CALength=20 #Length of the generated image (for min use 5)
-libFBCAGen.CAWidth=20 #Width of the generated image (for min use 4)
-libFBCAGen.useImages=0 #checks if you want images This is annoying
+# For FBCA gen
+libFBCAGen.CALength=20 #Length of torus
+libFBCAGen.CAWidth=20 #Width of torus
+libFBCAGen.useImages=0 #Keep 0
+libFBCAGen.finalImage=0 #Keep 0
 libFBCAGen.numOfGens=20 #number of generations
 libFBCAGen.numOfStates=2 #number of states (good until 10)
-numberOfTimes=10
-CAMapInit=[]
+
+## BORING INITS
+d=[];d=os.getcwd()+"/"
+curSide=["Left","Right","Middle"]
+CAMapInit=[];CAMapInit=libFBCAGen.initCA(CAMapInit) 
 borderLambdas=[]
-CAMapInit=libFBCAGen.initCA(CAMapInit) 
 
-##START
-##Get Lambdas
-lambdaLeft=0;lambdaRight=1
-lambdaMid=getMid(lambdaLeft,lambdaRight)
+## MAIN ##
+# Generates the inital L_g containers 
+lGLeft = lGContainer(0,sM1,libFBCAGen.generateFBCA(sM1,d,CAMapInit,curSide[0]),curSide[0])
+lGRight = lGContainer(1,sM2,libFBCAGen.generateFBCA(sM2,d,CAMapInit,curSide[1]),curSide[1])
+lGMid = lGContainer(0.5,libFBCAGen.genMorphSM(sM1,sM2,0.5),libFBCAGen.generateFBCA(libFBCAGen.genMorphSM(sM1,sM2,0.5),d,CAMapInit,curSide[2]),curSide[2])
 
-##Generate score matrices
-sMLeft=genMorphSM(sM1,sM2,lambdaLeft)
-sMRight=genMorphSM(sM1,sM2,lambdaRight)
-sMMid=genMorphSM(sM1,sM2,lambdaMid)
-
-##Generate L_gs
-lgLeft=generateFBCA(sMLeft,curSide[0],d,CAMapInit)
-lgRight=generateFBCA(sMRight,curSide[1],d,CAMapInit)
-lgMid=generateFBCA(sMMid,curSide[2],d,CAMapInit)
-
-##End point 
-endPoint=generateFBCA(sMRight,curSide[1],d,CAMapInit)
-lastDifferentLambda=0
 direction=0
+lastDifferentLambda=0
 ##Goes left to right 
-while (compareLs(lgRight,lgLeft)==0):
-    if (compareLs(lgLeft,lgMid)==1):
-        ##Get lambdas
-        lambdaLeft=lambdaMid
-        lambdaMid=getMid(lambdaLeft,lambdaRight)
-        ##Generate score matrices
-        sMLeft=libFBCAGen.copyList(sMMid)
-        sMMid=genMorphSM(sM1,sM2,lambdaMid)
-        ##Generate L_gs
-        lgLeft=libFBCAGen.copyOver(lgMid)
-        lgMid=generateFBCA(sMMid,curSide[2],d,CAMapInit)
-        direction+=1
-        #print("Go Right")
-    else:
-        ##Record last different lamdba
-        lastDifferentLambda=lambdaMid
-        ##Get lambdas
-        lambdaRight=lambdaMid
-        lambdaMid=getMid(lambdaLeft,lambdaRight)
-        ##Generate score matrices
-        sMRight=libFBCAGen.copyList(sMMid)
-        sMMid=genMorphSM(sM1,sM2,lambdaMid)
-        ##Generate L_gs
-        lgRight=libFBCAGen.copyOver(lgMid)
-        lgMid=generateFBCA(sMMid,curSide[2],d,CAMapInit)
-        direction+=1
-        #print("Go Left")
+for n in range(0,len(sMs)): # because we may have many 
+    if n%2 == 0:
+        while (libFBCAGen.compareLs(lGRight,lGLeft) == 0):
+            if (libFBCAGen.compareLs(lGLeft,lGMid) == 1):
+                ##Get lambdas Left -> Mid  and new Mid
+                lGLeft = lGContainer(lGMid.lambd,libFBCAGen.copyList(lGMid.sM),libFBCAGen.copyOver(lGMid.lG),curSide[0])
+                lGMid.lambd = getMid(lGLeft.lambd,lGRight.lambd)
+                lGMid.sM = libFBCAGen.genMorphSM(sM1,sM2,lGMid.lambd)
+                lGMid.lG = libFBCAGen.generateFBCA(lGMid.sM,d,CAMapInit,curSide[2])
+                direction+=1
+            else:
+                ##Record last different lamdba
+                lastDifferentLambda=lGMid.lambd
+                ##Get lambdas Right -> Mid and new Mid
+                lGRight = lGContainer(lGMid.lambd,libFBCAGen.copyList(lGMid.sM),libFBCAGen.copyOver(lGMid.lG),curSide[2])
+                lGMid.lambd = getMid(lGLeft.lambd,lGRight.lambd)
+                lGMid.sM = libFBCAGen.genMorphSM(sM1,sM2,lGMid.lambd)
+                lGMid.lG = libFBCAGen.generateFBCA(lGMid.sM,d,CAMapInit,curSide[2])
+                direction+=1
 
-    if (direction==numberOfTimes):
-        borderLambdas.append(lambdaMid)
-        #get lambs
-        lambdaLeft=lastDifferentLambda
-        lambdaRight=1
-        lambdaMid=getMid(lambdaLeft,lambdaRight)
-        #get sMs
-        sMLeft=genMorphSM(sM1,sM2,lambdaLeft)
-        sMRight=genMorphSM(sM1,sM2,lambdaRight)
-        sMMid=genMorphSM(sM1,sM2,lambdaMid)
-        #get Lgs
-        lgLeft=generateFBCA(sMLeft,"Found spot",d,CAMapInit)
-        lgRight=generateFBCA(sMRight,"Found spot",d,CAMapInit)
-        lgMid=generateFBCA(sMMid,"Found spot",d,CAMapInit)
-        #print(f"Left {lambdaLeft} Mid {lambdaMid} Right {lambdaRight}")
-        direction=0
-finalLambs = [round(x,5) for x in borderLambdas]
-for idx1,x in enumerate(finalLambs):
-    for idx2,y in enumerate(finalLambs):
-        #dont worry about the infinity case
-        if (abs(x-y)/min(abs(x),abs(y))<1e-4)and(idx1!=idx2):
-            finalLambs.remove(y)
-print(finalLambs)
-edgeRecord = open(f"morphEdges", "w")
-for n in range(len(sMs)):
-    if (n%2==0):
-        edgeRecord.write(f"{finalLambs}sMs{sMs[n]}sMs{sMs[n+1]}")
+            if (direction==numberOfTimes):
+                borderLambdas.append(lGMid.lambd)
+                # Get the left
+                tempSM = libFBCAGen.genMorphSM(sM1,sM2,lastDifferentLambda)
+                lGLeft = lGContainer(lastDifferentLambda,tempSM,libFBCAGen.generateFBCA(tempSM,d,CAMapInit,curSide[0]),curSide[0])
+                # Get the right
+                lGRight = lGContainer(1,sM2,libFBCAGen.generateFBCA(sM2,d,CAMapInit,curSide[1]),curSide[1])
+                # Get the mid
+                tempLambd = getMid(lGLeft.lambd,lGRight.lambd)
+                tempSM = libFBCAGen.genMorphSM(sM1,sM2,tempLambd)        
+                lGMid = lGContainer(tempLambd,tempSM,libFBCAGen.generateFBCA(tempSM,d,CAMapInit,curSide[2]),curSide[2])
+                # Reset our number of goes
+                direction=0
+        # Collect our edges and clean them up
+        finalLambs = [round(x,5) for x in borderLambdas]
+        for idx1,x in enumerate(finalLambs):
+            for idx2,y in enumerate(finalLambs):
+                #dont worry about the infinity case
+                if (abs(x-y)/min(abs(x),abs(y))<1e-4)and(idx1!=idx2):
+                    finalLambs.remove(y)
+        print(finalLambs)
+        # Print them off 
+        edgeRecord = open(f"morphEdges", "w")
+        for n in range(len(sMs)):
+            if (n%2==0):
+                edgeRecord.write(f"{finalLambs}sMs{sMs[n]}sMs{sMs[n+1]}")
