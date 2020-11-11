@@ -60,7 +60,7 @@ The generated regula falsi method generates behaviour records which looks as fol
 
 [0.06201, 0.14078, 0.39576, 0.47667, 0.52728, 0.83782, 0.86391]sMs[0.320205, 0.952292, 0.351335, 0.837774]sMs[0.390741, 0.728013, 0.614486, 0.378596]
 
-The first list shows the lambdas of thought edges, the final two lists are the two score matrices used in the morph. To generate images 'around' the edge, a small delta is perturbed around both points. For simplicity, just one of these deltas is shown. With only one exception, all edges are found successfully. 
+The first list shows the lambdas of thought edges, the final two lists are the two score matrices used in the morph. To generate images 'around' the edge, a small delta is perturbed around both points. For simplicity, just one of these deltas is shown. With only one exception, all edges are found successfully. Note the order was rearranged due to the different method of detection.
 
 ![edge1](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/1/1.gif)
 ![edgeG1](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/1/1.png)
