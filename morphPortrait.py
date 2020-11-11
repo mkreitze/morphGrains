@@ -29,12 +29,12 @@ sM2=[0.390741,0.728013,0.614486,0.378596]
 sMs=[sM1,sM2] # Matrices we are morphing between
 CAMapInit=[];CAMapInit=libFBCAGen.initCA(CAMapInit) #initalize a common L_0
 d=[];d=os.getcwd()+"/"
-random.seed(2)  #1 for held
+random.seed(4)  #1 for held
 
 ##Important varbs
 morphRes=1000 #How many equally spaced score matrices are generated btwn sM1 and sM2
 imageHeight=100 #Height of the generated image 
-quantifer="Two at 1000 rand(2)"
+quantifer="Two at 1000 rand(4)"
 lGs=[]
 behaviours=[]
 
@@ -67,7 +67,7 @@ for n in range(0,len(sMs)): #Incase we have multiple matrices we want to morph b
                 behaviours.append(temp) #Add this behaviour class to the behaviours list
             print(f"Finished {idx} of {len(lGs)}") #Makes it easier on the eyes
         morphRecord=open(f"morphPortrait record {quantifer}","w")
-        morphRecord.write(f"All behaviours in morph of sM1 = {sMs[n]} sM2 = {sMs[n+1]} \n")
+        morphRecord.write(f"All behaviours in morph of sMs{sMs[n]}sMs{sMs[n+1]} \n")
         for behaviour in behaviours:
             morphRecord.write(f"Behaviour similar to sM with lambda = {behaviour[0].lambd} \n")
         for behaviour in behaviours:
