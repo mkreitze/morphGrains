@@ -86,3 +86,5 @@ Thus the quantification of these iso-behavioural regions is too difficult for cu
 
 ![morph4dim](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20twoFourDimWeird.png)
 
+# still to do, check how this works with the crisscrossing and add crisscrossing to the library
+# My manual crisscrossing probably messed it all up
