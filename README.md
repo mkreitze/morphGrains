@@ -50,10 +50,6 @@ To even better visualize the iso-behavioural regions of each morph, the behaviou
 ![map4](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/4/4.gif)
 ![gif5](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/5/5.png)
 ![map5](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/5/5.gif)
-![gif6](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/6/6.png)
-![map6](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/6/6.gif)
-![gif7](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/7/7.png)
-![map7](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/7/7.gif)
 
 A slight issue with the morphPortrait method is the time it takes to actually generate these portraits. For a 1000 resolution (that is 1000 pixel columns) it takes about a 40 seconds. This is not efficient as the iso-behavioural regions are relatively large. To combat this a regula falsi method was used. Regula falsi attempts to guess the value by taking half steps with some basic logic. As an example, regula falsi with five steps attempting to find a point on the following number line would look as follows:
 ![regula](https://github.com/mkreitze/morphGrains/blob/master/regula%20falsi%20simple%20image.png) 
