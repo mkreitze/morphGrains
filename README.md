@@ -32,7 +32,8 @@ With this comparison, a better understanding of why morph portraits are used can
 
 ![morph portrait](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Two%20at%201000%20rand(4).png)
 
-To even better visualize the iso-behavioural regions of each morph, the behaviours found by each behavioural region can be shown. For example, take the previous morph portrait. Below is the behaviours (along with their final level-maps)
+To even better visualize the iso-behavioural regions of each morph, the behaviours found by each behavioural region can be shown. For example, take the previous morph portrait. Below is the behaviours (along with their final level-maps). It should be noted that the final two behaviours are _incredibly_ similar. Only off by four pixels. I believe this leads to the moving iso-behavioural regions.
+
 
 ![gif1](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/0.0/0.0.gif)
 ![map1](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/0.0/0.0%2020.png)
