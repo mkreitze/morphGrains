@@ -14,7 +14,9 @@ For example:
 shows both score matrices used, as well as the lambda varying on the interval. In this example 1000 equally spaced divisions as each column of pixels. Due to this representation, when a few columns of divisions produce the same behaviour (that being the final map generated after an FBCA is done) they produce areas of congruent behaviours. These have been named _iso-behavioural grains_.  
 
 The problem with this method is two fold:
+
   -Behaviours with a very small number of columns may not be noticeable (espeically if similar to their neighbours). 
+
   -There is no easy way to record each iso-behavioural grains
 
 To rectify this, the concept of a morph portrait was developed. 
