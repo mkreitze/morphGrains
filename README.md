@@ -22,4 +22,10 @@ A morph portrait is similar to a phase portrait for FBCAs (as described in https
 
 For reference, the previous linear morph is shown below as a morph portrait. 
 
-![morph portrait](https://github.com/mkreitze/morphGrains/blob/master/morphPortraitExample.png) 
+![morph portrait](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Two%20at%201000%20rand(1).png) 
+
+With this comparison, a better understanding of why morph portraits are used can be seen. Each iso-behavioural region is shown distinctly. While similar as both the linear morph and the morph portrait showcase similar numbers of behaviours but the span of the behaviours are slightly different. This anomaly can be understood through a variation of the inital random parameter that generates the first inital set of states (known as L_0). Varying L_0 leads to the following different morph portraits. 
+
+![morph portrait](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Two%20at%201000%20rand(2).png) 
+
+![morph portrait](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Two%20at%201000%20rand(3).png) 
