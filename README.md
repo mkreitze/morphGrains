@@ -11,3 +11,15 @@ For example:
 ![linear morph](https://github.com/mkreitze/morphGrains/blob/master/linearMorph.PNG) 
 
 shows both score matrices used, as well as the lambda varying on the interval. In this example 1000 equally spaced divisions as each column of pixels. Due to this representation, when a few columns of divisions produce the same behaviour (that being the final map generated after an FBCA is done) they produce areas of congruent behaviours. These have been named _iso-behavioural grains_.  
+
+The problem with this method is two fold:
+  -Behaviours with a very small number of columns may not be noticeable (espeically if similar to their neighbours). 
+  -There is no easy way to record each iso-behavioural grains
+
+To rectify this, the concept of a morph portrait was developed. 
+
+A morph portrait is similar to a phase portrait for FBCAs (as described in https://atrium.lib.uoguelph.ca/xmlui/handle/10214/21316). A morph portrait first generates each score matrix as normal. It then generates the level-maps (known as L_gs) using these score matrices in FBCAs with all other parameters constant. Each L_g is then directly compared to every other and is sorted into iso-behavioural grains. Each iso-behavioural grain is then recorded as a textfile called a behaviour record. Finally the image is made where each column of pixels is coloured depending on what iso-behavioural grain it is in. 
+
+For reference, the previous linear morph is shown below as a morph portrait. 
+
+![morph portrait](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Two%20at%201000.png) 
