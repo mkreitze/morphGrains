@@ -22,4 +22,4 @@ A morph portrait is similar to a phase portrait for FBCAs (as described in https
 
 For reference, the previous linear morph is shown below as a morph portrait. 
 
-![morph portrait](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Two%20at%201000.png) 
+![morph portrait](https://github.com/mkreitze/morphGrains/blob/master/morphPortraitExample.png) 
