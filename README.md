@@ -26,11 +26,11 @@ For reference, the previous linear morph is shown below as a morph portrait.
 
 With this comparison, a better understanding of why morph portraits are used can be seen. Each iso-behavioural region is shown distinctly. While similar as both the linear morph and the morph portrait showcase similar numbers of behaviours but the span of the behaviours are slightly different. This anomaly can be understood through a variation of the inital random parameter that generates the first inital set of states (known as L_0). Varying L_0 leads to the following different morph portraits. 
 
-![morph portrait](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Two%20at%201000%20rand(2).png) 
+![morph portrait2](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Two%20at%201000%20rand(2).png) 
 
-![morph portrait](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Two%20at%201000%20rand(3).png) 
+![morph portrait3](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Two%20at%201000%20rand(3).png) 
 
-![morph portrait](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Two%20at%201000%20rand(4).png)
+![morph portrait4](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Two%20at%201000%20rand(4).png)
 
 To even better visualize the iso-behavioural regions of each morph, the behaviours found by each behavioural region can be shown. For example, take the previous morph portrait. Below is the behaviours (along with their final level-maps). It should be noted that the final two behaviours are _incredibly_ similar. Only off by four pixels. I believe this leads to the moving iso-behavioural regions.
 
@@ -52,3 +52,5 @@ To even better visualize the iso-behavioural regions of each morph, the behaviou
 ![gif8](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/0.864/0.864.gif)
 ![map8](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/0.864/0.864%2020.png)
 
+A slight issue with the morphPortrait method is the time it takes to actually generate these portraits. For a 1000 resolution (that is 1000 pixel columns) it takes about a 40 seconds. This is not efficient as the iso-behavioural regions are relatively large. To combat this a regula falsi method was used. Regula falsi attempts to guess the value by taking half steps with some basic logic. As an example, regula falsi with five steps attempting to find a point on the following number line would look as follows:
+![regula](https://github.com/mkreitze/morphGrains/blob/master/regula%20falsi%20simple%20image.png) 
