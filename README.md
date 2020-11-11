@@ -78,8 +78,11 @@ The first list shows the lambdas of thought edges, the final two lists are the t
 
 # Trying to use this with more complex examples
 
-Consider taking those two previous score matrices, using the crisscrossing method (a method which allows the intrinsict qualities of two level-maps to be combined into a new level-map using a higher state FBCA, detailed in https://atrium.lib.uoguelph.ca/xmlui/handle/10214/21316) and generating linear morphs. What would be seen? What behaviours would be crossed. As shown below, a morph portrait between these 4x4 score matrices yields an insane number of iso-behavioural regions. This is seen by the gradient of colour across the morph portrait. It should be noted that the seeming spectral lines are due to the random seed found. 
+Consider taking those two previous score matrices, using the crisscrossing method (a method which allows the intrinsict qualities of two level-maps to be combined into a new level-map using a higher state FBCA, detailed in https://atrium.lib.uoguelph.ca/xmlui/handle/10214/21316) and generating linear morphs. What would be seen? What behaviours would be crossed. As shown below, a morph portrait between these 4x4 score matrices yields an insane number of iso-behavioural regions. This is seen by the gradient of colour across the morph portrait. It should be noted that the seeming spectral lines are due to the random seed chosen. 
 
-![morph4dim](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Four%20at%201000.png)
-![morph4dim2](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Four%20at%201000%20rand(2).png)
-![morph4dim3](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Four%20at%201000%20rand(3).png)
+![morph4dim](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Four%20FIXED.png)
+
+Thus the quantification of these iso-behavioural regions is too difficult for current methods (especially regular falsi as every column of pixels must now be found using 10 times the operations). This may be due to how crisscrossing generates its matrices and remains to be seen. For comparison, the first morph portrait was made using two random 4x4 score matrices.
+
+![morph4dim](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20twoFourDimWeird.png)
+
