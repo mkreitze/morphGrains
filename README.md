@@ -54,3 +54,9 @@ To even better visualize the iso-behavioural regions of each morph, the behaviou
 
 A slight issue with the morphPortrait method is the time it takes to actually generate these portraits. For a 1000 resolution (that is 1000 pixel columns) it takes about a 40 seconds. This is not efficient as the iso-behavioural regions are relatively large. To combat this a regula falsi method was used. Regula falsi attempts to guess the value by taking half steps with some basic logic. As an example, regula falsi with five steps attempting to find a point on the following number line would look as follows:
 ![regula](https://github.com/mkreitze/morphGrains/blob/master/regula%20falsi%20simple%20image.png) 
+
+The generated regula falsi method generates behaviour records which looks as follows:
+
+[0.06201, 0.14078, 0.39576, 0.47667, 0.52728, 0.83782, 0.86391]sMs[0.320205, 0.952292, 0.351335, 0.837774]sMs[0.390741, 0.728013, 0.614486, 0.378596]
+
+The first list shows the lambdas of thought edges, the final two lists are the two score matrices used in the morph. To generate images 'around' the edge, a small delta is perturbed around both points. This works with similar ability, 
