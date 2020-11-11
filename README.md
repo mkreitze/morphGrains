@@ -59,7 +59,8 @@ The generated regula falsi method generates behaviour records which looks as fol
 
 [0.06201, 0.14078, 0.39576, 0.47667, 0.52728, 0.83782, 0.86391]sMs[0.320205, 0.952292, 0.351335, 0.837774]sMs[0.390741, 0.728013, 0.614486, 0.378596]
 
-The first list shows the lambdas of thought edges, the final two lists are the two score matrices used in the morph. To generate images 'around' the edge, a small delta is perturbed around both points. This works with similar ability, 
+The first list shows the lambdas of thought edges, the final two lists are the two score matrices used in the morph. To generate images 'around' the edge, a small delta is perturbed around both points. For simplicity, just one of these deltas is shown. With only one exception, all edges are found successfully. 
+
 ![edge0](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/0.gif)
 ![edgeG0](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/0.png)
 ![edge1](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/1/1.gif)
@@ -74,3 +75,11 @@ The first list shows the lambdas of thought edges, the final two lists are the t
 ![edgeG5](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/5/5.png)
 ![edge6](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/6/6.gif)
 ![edgeG6](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/6/6.png)
+
+# Trying to use this with more complex examples
+
+Consider taking those two previous score matrices, using the crisscrossing method (a method which allows the intrinsict qualities of two level-maps to be combined into a new level-map using a higher state FBCA, detailed in https://atrium.lib.uoguelph.ca/xmlui/handle/10214/21316) and generating linear morphs. What would be seen? What behaviours would be crossed. As shown below, a morph portrait between these 4x4 score matrices yields an insane number of iso-behavioural regions. This is seen by the gradient of colour across the morph portrait. It should be noted that the seeming spectral lines are due to the random seed found. 
+
+![morph4dim](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Four%20at%201000.png)
+![morph4dim2](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Four%20at%201000%20rand(2).png)
+![morph4dim3](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/phaseMorph%20of%20Four%20at%201000%20rand(3).png)
