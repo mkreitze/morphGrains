@@ -38,21 +38,21 @@ With this comparison, a better understanding of why morph portraits are used can
 To even better visualize the iso-behavioural regions of each morph, the behaviours found by each behavioural region can be shown. For example, take the previous morph portrait. Below is the behaviours (along with their final level-maps). It should be noted that the final two behaviours are _incredibly_ similar. Only off by four pixels. I believe this leads to the moving iso-behavioural regions.
 
 
-![gif0](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/0/0.gif)
+![gif0](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/0/0.png)
 ![map0](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/0/0.gif)
-![gif1](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/1/1.gif)
+![gif1](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/1/1.png)
 ![map1](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/1/1.gif)
-![gif2](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/2/2.gif)
+![gif2](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/2/2.png)
 ![map2](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/2/2.gif)
-![gif3](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/3/3.gif)
+![gif3](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/3/3.png)
 ![map3](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/3/3.gif)
-![gif4](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/4/4.gif)
+![gif4](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/4/4.png)
 ![map4](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/4/4.gif)
-![gif5](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/5/5.gif)
+![gif5](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/5/5.png)
 ![map5](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/5/5.gif)
-![gif6](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/6/6.gif)
+![gif6](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/6/6.png)
 ![map6](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/6/6.gif)
-![gif7](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/7/7.gif)
+![gif7](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/7/7.png)
 ![map7](https://github.com/mkreitze/morphGrains/blob/master/morph%20portraits%20example/behaviour%20visualization%20pf%20phaseMorph%20Two%20at%201000%20rand(4)/7/7.gif)
 
 A slight issue with the morphPortrait method is the time it takes to actually generate these portraits. For a 1000 resolution (that is 1000 pixel columns) it takes about a 40 seconds. This is not efficient as the iso-behavioural regions are relatively large. To combat this a regula falsi method was used. Regula falsi attempts to guess the value by taking half steps with some basic logic. As an example, regula falsi with five steps attempting to find a point on the following number line would look as follows:
