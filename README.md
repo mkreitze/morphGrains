@@ -60,3 +60,17 @@ The generated regula falsi method generates behaviour records which looks as fol
 [0.06201, 0.14078, 0.39576, 0.47667, 0.52728, 0.83782, 0.86391]sMs[0.320205, 0.952292, 0.351335, 0.837774]sMs[0.390741, 0.728013, 0.614486, 0.378596]
 
 The first list shows the lambdas of thought edges, the final two lists are the two score matrices used in the morph. To generate images 'around' the edge, a small delta is perturbed around both points. This works with similar ability, 
+![edge0](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/0.gif)
+![edgeG0](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/0.png)
+![edge1](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/1.gif)
+![edgeG1](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/1.png)
+![edge2](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/2.gif)
+![edgeG2](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/2.png)
+![edge3](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/3.gif)
+![edgeG3](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/3.png)
+![edge4](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/4.gif)
+![edgeG4](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/4.png)
+![edge5](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/5.gif)
+![edgeG5](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/5.png)
+![edge6](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/6.gif)
+![edgeG6](https://github.com/mkreitze/morphGrains/blob/master/edge%20method%20example/visExample/0/6.png)
